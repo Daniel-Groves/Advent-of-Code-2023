@@ -1,34 +1,24 @@
 with open("day2_input.txt","r") as file:
     lines = [line.strip() for line in file]
 
-comparison = [12,13,14]
-
-TOTAL = 0
+total = 0
 
 for line in lines:
-    id = (line.split(":", 1)[0])[5:]
-    line = (line.split(":", 1)[1])
-    line = line.replace(" ", "")
-    newline = line.split(";")
-    newline = [i.split(",") for i in newline]
-    #print(newline)
-    for draw in newline:
-        colours = [0,0,0]
-        for colour in draw:
+    b_max = 0
+    r_max = 0
+    g_max = 0
+    line = (line.split(":")[1]).strip().split(";")
+    line = [i.strip().split(",") for i in line]
+    for game in line:
+        for colour in game:
+            num = colour.strip().split(" ")[0]
             if "red" in colour:
-                colours[0] = int(colour[:-3])
+                r_max = max(r_max, int(num))
             if "green" in colour:
-                colours[1] = int(colour[:-5])
+                g_max = max(g_max, int(num))
             if "blue" in colour:
-                colours[2] = int(colour[:-4])
-        if colours[0] > comparison[0] or colours[1] > comparison[1] or colours[2] > comparison[2]:
-            possible = False
-            break
-        else:
-            possible = True
-    if possible:
-        print(id)
-        TOTAL += int(id)
+                b_max = max(b_max, int(num))
 
+    total += r_max * g_max * b_max
 
-print(TOTAL)
+print(total)
