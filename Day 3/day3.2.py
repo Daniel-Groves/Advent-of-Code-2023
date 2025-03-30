@@ -19,7 +19,6 @@ for row, line in enumerate(lines):
         num = match.group()
         col = match.start()
         length = len(num)
-        adj = False
         gears_found = []
 
         for i in range(length):
@@ -33,7 +32,6 @@ for row, line in enumerate(lines):
 
 
 for gear in gears:
-    print(gears[gear])
     if len(gears[gear]) >= 2:
         total += math.prod(gears[gear])
 
